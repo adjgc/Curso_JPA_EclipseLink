@@ -5,18 +5,18 @@ import com.jpa.eclipselink.controller.dao.AlumnoDAO;
 import com.jpa.eclipselink.controller.util.JPAUtil;
 import com.jpa.eclipselink.model.entities.Expediente;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
         AlumnoDAO alumnoDAO = new AlumnoDAO();
         try {
-            Expediente expediente = new Expediente(new Date(), "Este alumno pertenece a la clase de ML");
+            Expediente expediente = new Expediente(LocalDate.now(), "Este alumno pertenece a la clase de ML");
             Alumno alumno = new Alumno("DeepSeek", "High-Flyer", "deep.seek@correo.com", expediente);
             System.out.println("1: Inserción del Alumno con su respectivo expediente");
             alumnoDAO.insert(alumno);
             System.out.println("2: Recuperación del alumno");
-            Alumno recuperado = alumnoDAO.findById(1L);
+            Alumno recuperado = alumnoDAO.findById(alumno.getIdAlumno());
             System.out.println("---------------------------------------------");
             System.out.println("**********DATOS DEL ALUMNO**********");
             System.out.println("Nombre: " + recuperado.getNombre() + " Apellido: " + recuperado.getApellido());

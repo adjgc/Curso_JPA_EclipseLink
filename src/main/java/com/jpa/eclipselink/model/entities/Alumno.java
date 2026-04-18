@@ -18,7 +18,7 @@ public class Alumno implements Serializable {
     private String apellido;
     @Column(name = "email", nullable = false, unique = true)
     private String email;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_idExpediente", referencedColumnName = "idExpediente")
     private Expediente expediente;
 

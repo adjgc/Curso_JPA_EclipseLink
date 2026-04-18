@@ -1,4 +1,4 @@
-package com.jpa.eclipselink.entities;
+package com.jpa.eclipselink.model.entities;
 
 import jakarta.persistence.*;
 
@@ -16,19 +16,19 @@ public class Alumno implements Serializable {
     private String nombre;
     @Column(name = "apellido", nullable = false)
     private String apellido;
-    @Column(name = "matricula", nullable = false, unique = true)
-    private String matricula;
     @Column(name = "email", nullable = false, unique = true)
     private String email;
+    @OneToOne
+    private Expediente expediente;
 
     public Alumno() {
     }
 
-    public Alumno(String nombre, String apellido, String matricula, String email) {
+    public Alumno(String nombre, String apellido, String email, Expediente expediente) {
         this.nombre = nombre;
         this.apellido = apellido;
-        this.matricula = matricula;
         this.email = email;
+        this.expediente = expediente;
     }
 
     public Long getIdAlumno() {
@@ -55,14 +55,6 @@ public class Alumno implements Serializable {
         this.apellido = apellido;
     }
 
-    public String getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -71,14 +63,22 @@ public class Alumno implements Serializable {
         this.email = email;
     }
 
+    public Expediente getExpediente() {
+        return expediente;
+    }
+
+    public void setExpediente(Expediente expediente) {
+        this.expediente = expediente;
+    }
+
     @Override
     public String toString() {
         return "Alumno{" +
                 "idAlumno= " + idAlumno +
                 ", nombre= '" + nombre + '\'' +
                 ", apellido= '" + apellido + '\'' +
-                ", matricula= '" + matricula + '\'' +
                 ", email= '" + email + '\'' +
+                ", expediente='" + expediente.toString() + '\'' +
                 '}';
     }
 }

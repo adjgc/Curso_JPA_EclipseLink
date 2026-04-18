@@ -1,37 +1,30 @@
 package com.jpa.eclipselink;
 
-import com.jpa.eclipselink.entities.Alumno;
-import com.jpa.eclipselink.dao.AlumnoDAO;
-import com.jpa.eclipselink.util.JPAUtil;
-import jakarta.persistence.EntityManager;
-import java.util.List;
+import com.jpa.eclipselink.controller.dao.ExpedienteDAO;
+import com.jpa.eclipselink.model.entities.Alumno;
+import com.jpa.eclipselink.controller.dao.AlumnoDAO;
+import com.jpa.eclipselink.controller.util.JPAUtil;
+import com.jpa.eclipselink.model.entities.Expediente;
+
+import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
+        ExpedienteDAO expedienteDAO = new ExpedienteDAO();
+        AlumnoDAO alumnoDAO = new AlumnoDAO();
         try {
-            AlumnoDAO alumnoDAO = new AlumnoDAO();
-            System.out.println("1: Inserción de Alumnos");
-            Alumno alumno1 = new Alumno("Claude", "Code", "01928378465", "claude.code@correo.com");
-            Alumno alumno2 = new Alumno("Copilot", "Microsoft", "6574839201", "copilot.microsoft@correo.com");
+            System.out.println("1: Inserción de Expediente");
+            Expediente expediente = new Expediente(new Date(), "Alumno de la carrera de IA");
+            expedienteDAO.insert(expediente);
+            System.out.println("2: Inserción de Alumno");
+            Alumno alumno = new Alumno("Claude", "Code", "claude.code@correo.com", expediente);
+            alumnoDAO.insert(alumno);
 
-            alumnoDAO.insert(alumno1);
-            alumnoDAO.insert(alumno2);
-
-            System.out.println("\n2: Búsqueda por ID");
-            Alumno buscado = alumnoDAO.findById(alumno1.getIdAlumno());
-            System.out.println("Alumno recuperado: " + buscado);
-
-            System.out.println("\n3: Actualización de alumno");
-            buscado.setApellido("Anthropic");
-            alumnoDAO.update(buscado);
-            System.out.println("Actualización exitosa: " + alumnoDAO.findById(buscado.getIdAlumno()));
-
-            System.out.println("\n4: Lista de todos los alumnos guardados");
-            List<Alumno> lista = alumnoDAO.findAll();
-            lista.forEach(System.out::println);
-
-            System.out.println("\nEliminación de alumno");
-            alumnoDAO.deleteById(alumno2.getIdAlumno());
+            Alumno recuperado = alumnoDAO.findById(1L);
+            System.out.println("---------------------------------------------");
+            System.out.println("**********DATOS DEL ALUMNO**********");
+            System.out.println("Nombre: " + recuperado.getNombre() + " Apellido: " + recuperado.getApellido());
+            System.out.println("El alumno está asociado al expediente: " + recuperado.getExpediente().toString());
         } catch (Exception e) {
             System.err.println("Error en la ejecución del flujo de consultas.");
             e.printStackTrace();

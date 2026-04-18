@@ -9,7 +9,7 @@ Este repositorio contiene el material didáctico, las guías prácticas y los la
 * Dominar el estándar **JPA (Jakarta Persistence)** mediante el uso de la implementación de referencia **EclipseLink**.
 * Comprender y aplicar el paradigma **Object-Relational Mapping (ORM)** para la gestión de datos.
 * Implementar operaciones de persistencia atómica (**CRUD**) siguiendo patrones de diseño robustos.
-* Modelar arquitecturas de datos complejas mediante asociaciones `@OneToOne`, `@OneToMany` y `@ManyToMany`.
+* Modelar arquitecturas de datos complejas mediante asociaciones `@OneToOne` y `@OneToMany`.
 
 ---
 

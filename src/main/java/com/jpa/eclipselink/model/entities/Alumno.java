@@ -18,7 +18,8 @@ public class Alumno implements Serializable {
     private String apellido;
     @Column(name = "email", nullable = false, unique = true)
     private String email;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_idExpediente", referencedColumnName = "idExpediente")
     private Expediente expediente;
 
     public Alumno() {

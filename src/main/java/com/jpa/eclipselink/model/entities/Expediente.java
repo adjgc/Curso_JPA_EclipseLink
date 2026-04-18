@@ -18,6 +18,8 @@ public class Expediente implements Serializable {
     private Date fechaInscripcion;
     @Column(name = "observaciones")
     private String observaciones;
+    @OneToOne(mappedBy = "expediente")
+    private Alumno alumno;
 
     public Expediente() {
     }
@@ -49,6 +51,14 @@ public class Expediente implements Serializable {
 
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
+    }
+
+    public Alumno getAlumno() {
+        return alumno;
+    }
+
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
     }
 
     @Override

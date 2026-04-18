@@ -10,6 +10,7 @@ public class Alumno implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idAlumno")
     private Long idAlumno;
     @Column(name = "nombre", nullable = false)
     private String nombre;

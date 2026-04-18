@@ -4,6 +4,9 @@ import com.jpa.eclipselink.entities.Alumno;
 import com.jpa.eclipselink.util.JPAUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceException;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 
 import java.util.List;
 import java.util.Objects;
@@ -56,6 +59,41 @@ public class AlumnoDAO {
         } catch (Exception ex) {
             throw new PersistenceException(
                     String.format("Error al obtener la lista completa de alumnos - %s", ex.getMessage())
+            );
+        }finally {
+            close(entityManager);
+        }
+    }
+
+    public List<Alumno> findAllPaged(int pageNumber, int pageSize){
+        EntityManager entityManager = open();
+        try {
+            return entityManager.createQuery("SELECT a FROM Alumno a", Alumno.class)
+                    .setFirstResult((pageNumber - 1) * pageSize)
+                    .setMaxResults(pageNumber)
+                    .getResultList();
+        }catch (Exception ex){
+            throw new PersistenceException(
+                    String.format("Error en la paginación de alumnos - Página: %s - Tamaño: %s - %s",
+                            pageNumber, pageNumber, ex.getMessage())
+            );
+        }finally {
+            close(entityManager);
+        }
+    }
+
+    public List<Alumno> finadAllCriteriaAPI(){
+        EntityManager entityManager = open();
+        try {
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+            CriteriaQuery<Alumno> criteriaQuery = criteriaBuilder.createQuery(Alumno.class);
+            Root<Alumno> root = criteriaQuery.from(Alumno.class);
+            criteriaQuery.select(root);
+
+            return entityManager.createQuery(criteriaQuery).getResultList();
+        } catch (Exception ex) {
+            throw new PersistenceException(
+                    String.format("Error en la consulta con CriteriaAPI - %s", ex.getMessage())
             );
         }finally {
             close(entityManager);

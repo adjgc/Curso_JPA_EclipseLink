@@ -3,7 +3,7 @@ package com.jpa.eclipselink.model.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "expedientes")
@@ -13,9 +13,8 @@ public class Expediente implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idExpediente")
     private long idExpediente;
-    @Temporal(TemporalType.DATE)
     @Column(name = "fechaInscripcion")
-    private Date fechaInscripcion;
+    private LocalDate fechaInscripcion;
     @Column(name = "observaciones")
     private String observaciones;
     @OneToOne(mappedBy = "expediente")
@@ -24,7 +23,7 @@ public class Expediente implements Serializable {
     public Expediente() {
     }
 
-    public Expediente(Date fechaInscripcion, String observaciones) {
+    public Expediente(LocalDate fechaInscripcion, String observaciones) {
         this.fechaInscripcion = fechaInscripcion;
         this.observaciones = observaciones;
     }
@@ -37,11 +36,11 @@ public class Expediente implements Serializable {
         this.idExpediente = idExpediente;
     }
 
-    public Date getFechaInscripcion() {
+    public LocalDate getFechaInscripcion() {
         return fechaInscripcion;
     }
 
-    public void setFechaInscripcion(Date fechaInscripcion) {
+    public void setFechaInscripcion(LocalDate fechaInscripcion) {
         this.fechaInscripcion = fechaInscripcion;
     }
 

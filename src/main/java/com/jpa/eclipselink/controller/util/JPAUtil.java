@@ -1,4 +1,4 @@
-package com.jpa.eclipselink.util;
+package com.jpa.eclipselink.controller.util;
 
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;

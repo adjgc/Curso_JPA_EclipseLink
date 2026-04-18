@@ -1,9 +1,9 @@
 package com.jpa.eclipselink;
 
-import com.jpa.eclipselink.entities.Alumno;
-import com.jpa.eclipselink.dao.AlumnoDAO;
-import com.jpa.eclipselink.util.JPAUtil;
-import jakarta.persistence.EntityManager;
+import com.jpa.eclipselink.model.entities.Alumno;
+import com.jpa.eclipselink.controller.dao.AlumnoDAO;
+import com.jpa.eclipselink.controller.util.JPAUtil;
+
 import java.util.List;
 
 public class Main {

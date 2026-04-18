@@ -1,7 +1,7 @@
-package com.jpa.eclipselink.dao;
+package com.jpa.eclipselink.controller.dao;
 
-import com.jpa.eclipselink.entities.Alumno;
-import com.jpa.eclipselink.util.JPAUtil;
+import com.jpa.eclipselink.model.entities.Alumno;
+import com.jpa.eclipselink.controller.util.JPAUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceException;
 import jakarta.persistence.criteria.CriteriaBuilder;

@@ -1,4 +1,4 @@
-package com.jpa.eclipselink.entities;
+package com.jpa.eclipselink.model.entities;
 
 import jakarta.persistence.*;
 

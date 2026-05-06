@@ -3,6 +3,8 @@ package com.jpa.eclipselink.model.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "alumnos")
@@ -21,6 +23,8 @@ public class Alumno implements Serializable {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_idExpediente", referencedColumnName = "idExpediente")
     private Expediente expediente;
+    @OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Curso> cursos = new ArrayList<>();
 
     public Alumno() {
     }
@@ -70,6 +74,19 @@ public class Alumno implements Serializable {
 
     public void setExpediente(Expediente expediente) {
         this.expediente = expediente;
+    }
+
+    public List<Curso> getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
+    }
+
+    public void addCurso(Curso curso) {
+        cursos.add(curso);
+        curso.setAlumno(this);
     }
 
     @Override

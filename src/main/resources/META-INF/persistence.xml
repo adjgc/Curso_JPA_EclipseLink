@@ -9,6 +9,7 @@
 
         <class>com.jpa.eclipselink.model.entities.Alumno</class>
         <class>com.jpa.eclipselink.model.entities.Expediente</class>
+        <class>com.jpa.eclipselink.model.entities.Curso</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/curso_jpa"/>
